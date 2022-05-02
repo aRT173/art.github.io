@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Канбан-доска</title>
+</head>
+<body>
+    <div class="wrapper">
+       <div class="table">
+            <table class="kanban-table">
+                <thead>
+                   <tr>
+                        <th>Backlog</th>
+                        <th>A faire</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                        <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                        <td ondrop="drop(event)" ondragover="allowDrop(event)"></td>
+                   </tr>
+                </tbody>
+            </table>
+            <div class="table-add">
+                <div class="table-add__desc">+</div>
+            </div>
+       </div>
+       <!-- Заполнение карточки -->
+       <div class="modal">
+           <div class="modal__content">
+               <button class="modal__close-button modal__close-button_angular"><img src="/img/close.png" width="15px" alt=""></button>
+               <h2 class="modal__title">Заполнение карточки</h2>
+               <form class="modal__form formFill">
+                   <div class="form__title"><input placeholder="Название" name="title" type="text"></div>
+                   <div class="form__description"><textarea placeholder="Описание" name="describing" cols="30" rows="5"></textarea></div>
+                   <div class="form__color"><input name="colorSelect" value="#fff200" type="color"></div>
+                   <button class="form__submit-button" type="submit">Submit</button>
+                   <button type="button" class="form__close-button">Cancel</button>
+               </form>
+           </div>
+       </div>
+    </div>
+    <script>
+        function dragStart(event) {
+          event.dataTransfer.setData("Text", event.target.id);
+        }
+      
+      
+        function allowDrop(event) {
+          event.preventDefault();
+        }
+      
+        function drop(event) {
+          event.preventDefault();
+          var data = event.dataTransfer.getData("Text");
+          event.target.appendChild(document.getElementById(data));
+        }
+        </script>
+    <script type="module" src="js/index.js"></script>
+    
+</body>
+</html>
